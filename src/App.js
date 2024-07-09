@@ -8,6 +8,7 @@ import Login from './Pages/Login';
 import Contact from './Pages/Contact';
 import SignUpForm from './Pages/Signup';
 import Home from './Pages/Home';
+import CustomerInf from './Pages/CustomerInf';
 
 const App = () => {
   return (
@@ -17,12 +18,13 @@ const App = () => {
           <Routes>
             <Route path="/signup" element={<SignUpForm />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/purchase" element={<Purchase />} />
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUpForm />} />
+            <Route path="/CustInf" element={<CustomerInf/>} />
           </Routes>
         </div>
       </Router>
