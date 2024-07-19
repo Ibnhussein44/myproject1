@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Signup.css'; // Make sure to create this CSS file for styling
-import logo from '../image/booklogo.webp'; // Adjust the path based on the actual location
+import axios from 'axios';
+import './Signup.css';  // Ensure you have the appropriate CSS file
 
-const SignUpForm = () => {
+const Signup = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -13,7 +12,6 @@ const SignUpForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,22 +31,31 @@ const SignUpForm = () => {
     return tempErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      // No errors, proceed to Dashboard
-      navigate('/dashboard');
+      try {
+        // API call to register user
+        const response = await axios.post('http://localhost:8080/api/customers', {
+          name: formData.fullName,
+          email: formData.email,
+          password: formData.password
+        });
+        console.log('Signup Successful', response.data); // Handle success accordingly, e.g., redirect to dashboard
+        window.location.href = '/dashboard'; // Example redirection
+      } catch (error) {
+        console.error('Signup Failed', error);
+      }
     }
   };
 
   return (
     <div className="signup-container">
       <div className="signup-card">
-        <img src={logo} alt="logo" className="logo" />
-        <h2 className="signup-title">Sign Up</h2>
+        <h2>Sign Up</h2>
         <form className="signup-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="fullName">Full name <span className="required">*</span></label>
@@ -123,6 +130,6 @@ const SignUpForm = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SignUpForm;
+export default Signup;

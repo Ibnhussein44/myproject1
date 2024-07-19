@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Style.css';
 import './Purchase.css';
 import { Link } from 'react-router-dom';
 import logo from '../image/booklogo.webp';
-import { CartContext } from '../Pages/CartContext'; // Adjust the path as needed
+import { CartContext } from '../Pages/CartContext'; 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
@@ -38,17 +38,17 @@ const Dashboard = () => {
 
   const books = [
     { title: 'The Silver Pigs', price: '$ 56', imgSrc: 'recbook2.jpg' },
-    { title: 'Zanzibar History', price: 'TZS 14,000', imgSrc: 'zanz history.webp' },
-    { title: 'A Man of the People', price: 'TZS 22,000', imgSrc: 'a man of the ppl.jpg' },
-    { title: 'The Handmaids Tale', price: 'TZS 15,000', imgSrc: 'recbook1.jpg' },
-    { title: 'The Signature of All Things', price: 'TZS 10,000', imgSrc: 'recbook3.jpeg' },
-    { title: 'Don Quihote', price: 'TZS 18,000', imgSrc: 'book4.jpg' },
-    { title: 'Mabala The Farmer', price: 'TZS 6,000', imgSrc: 'mabala.jpg' },
-    { title: 'The Great Gatsby', price: 'TZS 12,000', imgSrc: 'book5.jpg' },
-    { title: 'Malenga Wapya', price: 'TZS 10,000', imgSrc: 'malenga wapya.jpg' },
-    { title: 'Hujafa Hujaumbika', price: 'TZS 5,000', imgSrc: 'hujafa huja.jpg' },
-    { title: 'One Hundred Years of Solitude', price: 'TZS 13,000', imgSrc: 'book6.jpg' },
-    { title: 'In Search of Lost Time', price: 'TZS 7,000', imgSrc: 'book7.jpg' }
+    { title: 'Zanzibar History', price: '$ 14', imgSrc: 'zanz history.webp' },
+    { title: 'A Man of the People', price: '$ 22', imgSrc: 'a man of the ppl.jpg' },
+    { title: 'The Handmaids Tale', price: '$ 15', imgSrc: 'recbook1.jpg' },
+    { title: 'The Signature of All Things', price: '$ 10', imgSrc: 'recbook3.jpeg' },
+    { title: 'Don Quihote', price: '$ 18', imgSrc: 'book4.jpg' },
+    { title: 'Mabala The Farmer', price: '$ 6', imgSrc: 'mabala.jpg' },
+    { title: 'The Great Gatsby', price: '$ 12', imgSrc: 'book5.jpg' },
+    { title: 'Malenga Wapya', price: '$ 10', imgSrc: 'malenga wapya.jpg' },
+    { title: 'Hujafa Hujaumbika', price: '$ 5', imgSrc: 'hujafa huja.jpg' },
+    { title: 'One Hundred Years of Solitude', price: '$ 13', imgSrc: 'book6.jpg' },
+    { title: 'In Search of Lost Time', price: '$ 7', imgSrc: 'book7.jpg' }
   ];
 
   return (
@@ -63,7 +63,7 @@ const Dashboard = () => {
       <nav>
         <div className="nav"></div>
         <ul className="nav-links">
-          <li><a href="/home">home</a></li>
+          <li><a href="/">home</a></li>
           <li><Link to="/about">aboutus</Link></li>
           <li><a href="#cart">cart</a></li>
           <li><Link to="/Signup">signin</Link></li>
@@ -125,7 +125,7 @@ const Dashboard = () => {
           </div>
           <div className="cart-total">
             <strong className="cart-total-title">Total</strong>
-            <span className="cart-total-price">TZS {total}</span>
+            <span className="cart-total-price">$ {total}</span>
           </div>
 
           <button className="btn btn-purchase" onClick={handlePurchaseClick}><a href="/purchase">Purchase</a></button>

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Login.css';
-import logo from '../image/booklogo.webp'; // Adjust the path based on the actual location
-
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ensure you have react-icons installed
+import logo from '../image/booklogo.webp';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -15,12 +16,32 @@ function Login() {
 
   const isFormValid = email !== '' && password !== '';
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      try {
+        const response = await axios.post('http://localhost:8080/api/customers/login', {
+          email,
+          password,
+        });
+
+        if (response.data) {
+          window.location.href = '/dashboard';
+        } else {
+          setErrorMessage("You don't have an account, please signup.");
+        }
+      } catch (error) {
+        setErrorMessage("Login failed, please try again.");
+      }
+    }
+  };
+
   return (
     <div className="App">
       <div className="login-container">
         <img src={logo} alt="Logo" className="logo" />
         <h2>Login</h2>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="input-group">
             <label>Email</label>
             <input 
@@ -48,13 +69,13 @@ function Login() {
             </div>
           </div>
           <div className="forgot-password">
-            <a href="/">Forgot password?</a>
+            <a href="/signup">Forgot password?</a>
           </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
           <button 
             type="submit" 
             className="login-button" 
-            disabled={!isFormValid} 
-            onClick={() => { if (isFormValid) window.location.href = '/dashboard'; }}
+            disabled={!isFormValid}
           >
             Login
           </button>
